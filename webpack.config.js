@@ -35,6 +35,9 @@ module.exports = {
             inject: 'body',
             filename: `${BUILD}/index.html`
         })
-    ]
+    ],
+    resolve: {
+         extensions: ['.js', '.jsx', '.sass']
+    }
 
 }
