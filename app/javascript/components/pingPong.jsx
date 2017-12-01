@@ -1,5 +1,4 @@
 import React from 'react';
-
 export default class PingPong extends React.Component {
 
     constructor(props) {

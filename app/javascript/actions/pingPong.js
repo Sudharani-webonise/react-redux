@@ -1,4 +1,4 @@
-import actions from './index';
+import actions from '../actions';
 
 export const hitPing = (pingMessage) => {
     return {
