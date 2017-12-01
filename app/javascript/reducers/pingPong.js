@@ -1,4 +1,4 @@
-import actions from '../actions/index';
+import actions from '../actions';
 
 export const pingPong = (state = {}, action) => {
     switch (action.type) {

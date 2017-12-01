@@ -1,18 +1,21 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Main from './main';
 import { createStore , applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { routerMiddleware } from 'react-router-redux';
-import { browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
+import ROUTES from'./router';
+import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux';
+import rootReducer from './reducers';
+import {routeLocationDidUpdate} from './actions/location';
 
-let store = createStore(rootReducer, compose(applyMiddleware(thunkMiddleware, routerMiddleware(browserHistory), createLogger())))
+let store = createStore(rootReducer, compose(applyMiddleware(thunkMiddleware, routerMiddleware(browserHistory), createLogger())));
+const history = syncHistoryWithStore(browserHistory, store)
+history.listen(location => store.dispatch(routeLocationDidUpdate(location)))
 ReactDOM.render(
     <Provider store={store}>
-        <Main />
+          <Router history={history} routes={ROUTES} />
     </Provider>,
     document.getElementById('root')
 )
